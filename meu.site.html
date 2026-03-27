@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ProFlix</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #020617;
+    color: white;
+}
+
+/* HEADER */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: rgba(2,6,23,0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    color: #38bdf8;
+    text-shadow: 0 0 10px #38bdf8;
+}
+
+nav a {
+    color: #cbd5f5;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+.header-btn {
+    background: #38bdf8;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* BANNER */
+.banner {
+    height: 100vh;
+    background: linear-gradient(to top, #020617, transparent),
+    url('jean/foto0');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+}
+
+.banner h2 {
+    font-size: 60px;
+}
+
+/* SECTIONS */
+.section {
+    padding: 40px;
+    margin-top: -100px;
+}
+
+.row {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+}
+
+/* CARDS */
+.card {
+    min-width: 260px;
+    height: 160px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.img-placeholder {
+    position: absolute;
+    inset: 0;
+}
+
+.img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, black, transparent);
+}
+
+.card span {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 2;
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #020617;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    text-align: center;
+}
+
+#tituloAula {
+    margin-bottom: 10px;
+}
+
+#videoAula {
+    margin: 15px 0;
+}
+
+#conteudoAula {
+    margin-top: 10px;
+    color: #cbd5f5;
+}
+
+iframe {
+    border-radius: 10px;
+}
+
+
+.cronograma {
+    padding: 40px;
+}
+
+.aula {
+    background: #0f172a;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #010409;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">ProFlix</div>
+
+    <nav>
+        <a href="#">Início</a>
+        <a href="#">Cursos</a>
+        <a href="#">Minha Lista</a>
+        <a href="#cronograma">Cronograma</a>
+    </nav>
+
+    <a href="https://drive.google.com" target="_blank">
+        <button class="header-btn">Material</button>
+    </a>
+</header>
+
+<section class="banner">
+    <h2>Domine a Programação</h2>
+    <p>Aprenda do zero ao avançado 🚀</p>
+</section>
+
+<section class="section">
+    <h3>🔥 Cursos Populares</h3>
+
+    <div class="row">
+
+        <div class="card" onclick="abrirModal('html')">
+            <div class="img-placeholder">
+                <img src="jean/foto4.jpg">
+            </div>
+            <span>HTML & CSS</span>
+        </div>
+
+        <div class="card" onclick="abrirModal('js')">
+            <div class="img-placeholder">
+                <img src="jean/foto3.jpg">
+            </div>
+            <span>JavaScript</span>
+        </div>
+
+        <div class="card" onclick="abrirModal('react')">
+            <div class="img-placeholder">
+                <img src="jean/foto2.jpg">
+            </div>
+            <span>React</span>
+        </div>
+
+        <div class="card" onclick="abrirModal('backend')">
+            <div class="img-placeholder">
+                <img src="jean/photo1'.jpg">
+            </div>
+            <span>Backend</span>
+        </div>
+
+    </div>
+</section>
+
+<section class="cronograma" id="cronograma">
+    <h3> Cronograma</h3>
+
+    <div class="aula" onclick="abrirAula(23)"><span>Dia 23 - HTML</span><span>20:00</span></div>
+    <div class="aula" onclick="abrirAula(24)"><span>Dia 24 - JavaScript</span><span>20:00</span></div>
+    <div class="aula" onclick="abrirAula(25)"><span>Dia 25 - React</span><span>20:00</span></div>
+    <div class="aula" onclick="abrirAula(26)"><span>Dia 26 - Backend</span><span>20:00</span></div>
+    <div class="aula" onclick="abrirAula(27)"><span>Dia 27 - Projeto</span><span>20:00</span></div>
+    <div class="aula" onclick="abrirAula(28)"><span>Dia 28 - Final</span><span>20:00</span></div>
+</section>
+
+<!-- MODAL CURSOS -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="titulo"></h2>
+        <p id="descricao"></p>
+        <button onclick="fecharModal()">Fechar</button>
+    </div>
+</div>
+
+<!-- MODAL AULA -->
+<div class="modal" id="modalAula">
+    <div class="modal-content">
+        <h2 id="tituloAula"></h2>
+        <div id="videoAula"></div>
+        <p id="conteudoAula"></p>
+        <button onclick="fecharAula()">Fechar</button>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 ProFlix</p>
+</footer>
+
+<script>
+function abrirModal(tipo) {
+    const titulo = document.getElementById("titulo");
+    const descricao = document.getElementById("descricao");
+
+    if (tipo === "html") {
+        titulo.innerText = "HTML & CSS";
+        descricao.innerText = "Estrutura e estilo de sites.";
+    }
+
+    if (tipo === "js") {
+        titulo.innerText = "JavaScript";
+        descricao.innerText = "Interatividade e lógica.";
+    }
+
+    if (tipo === "react") {
+        titulo.innerText = "React";
+        descricao.innerText = "Interfaces modernas.";
+    }
+
+    if (tipo === "backend") {
+        titulo.innerText = "Backend";
+        descricao.innerText = "Servidor e banco de dados.";
+    }
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+function fecharModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function abrirAula(dia) {
+    const hoje = new Date().getDate();
+    const titulo = document.getElementById("tituloAula");
+    const conteudo = document.getElementById("conteudoAula");
+    const video = document.getElementById("videoAula");
+
+    if (dia <= hoje) {
+        titulo.innerText = "Aula liberada 🎬";
+        conteudo.innerText = "Conteúdo disponível.";
+
+        video.innerHTML = '<iframe width="100%" height="250" src="https://www.youtube.com/embed/mU6anWqZJcc" frameborder="0" allowfullscreen></iframe>';
+    } else {
+        titulo.innerText = "🔒 Aula Bloqueada";
+        conteudo.innerText = "Ainda não disponível.";
+        video.innerHTML = "";
+    }
+
+    document.getElementById("modalAula").style.display = "flex";
+}
+
+function fecharAula() {
+    document.getElementById("modalAula").style.display = "none";
+}
+</script>
+
+</body>
+</html>

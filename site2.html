@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ProFlix</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#020617;
+    color:white;
+}
+
+/
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    background:rgba(2,6,23,0.85);
+    backdrop-filter:blur(12px);
+    display:flex;
+    justify-content:space-between;
+    padding:15px 40px;
+    z-index:1000;
+}
+
+.logo{
+    font-family:'Orbitron';
+    font-size:28px;
+    color:#38bdf8;
+}
+
+nav a{
+    color:#cbd5f5;
+    margin:0 15px;
+    text-decoration:none;
+}
+nav a:hover{color:#38bdf8;}
+
+.header-btn{
+    background:#38bdf8;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+
+.banner{
+    height:100vh;
+    background:linear-gradient(to top,#020617,transparent),
+    url('jean/foto0.jpg');
+    background-size:cover;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px;
+}
+.banner h2{font-size:60px;}
+
+
+.section{padding:40px;margin-top:-100px;}
+.row{display:flex;gap:20px;overflow-x:auto;}
+
+/* CARDS */
+.card{
+    min-width:260px;
+    height:160px;
+    border-radius:15px;
+    overflow:hidden;
+    position:relative;
+    cursor:pointer;
+    transition:.3s;
+}
+.card img{width:100%;height:100%;object-fit:cover;}
+
+.card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,black,transparent);
+}
+
+.card span{
+    position:absolute;
+    bottom:10px;
+    left:10px;
+}
+.card:hover{transform:scale(1.1);}
+
+
+.cronograma{padding:40px;}
+.aula{
+    background:#0f172a;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    cursor:pointer;
+}
+
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+.modal-content{
+    background:#020617;
+    padding:30px;
+    border-radius:12px;
+    max-width:500px;
+    text-align:center;
+}
+
+
+.footer-container{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    padding:40px;
+    background:#010409;
+}
+.footer-box{
+    max-width:300px;
+}
+.footer-box h3,.footer-box h4{
+    color:#38bdf8;
+    margin-bottom:10px;
+}
+.footer-box p,.footer-box a{
+    color:#cbd5f5;
+    font-size:14px;
+    text-decoration:none;
+}
+.footer-box a:hover{color:#38bdf8;}
+
+.copy{
+    text-align:center;
+    padding:15px;
+    background:#000;
+}
+
+.whatsapp{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    padding:15px;
+    border-radius:50%;
+    font-size:20px;
+    text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">ProFlix</div>
+
+    <nav>
+        <a href="#">Início</a>
+        <a href="#">Cursos</a>
+        <a href="#cronograma">Cronograma</a>
+    </nav>
+
+    <a href="https://drive.google.com/file/d/13YYRKSE8jfARlHpf3f-0ZUStFsjEVxZR/view?usp=sharings" target="_blank">
+        <button class="header-btn">Material</button>
+    </a>
+</header>
+
+<section class="banner">
+    <h2>Domine a Programação</h2>
+    <p>Aprenda do zero ao avançado </p>
+</section>
+
+<section class="section">
+    <h3>Cursos Populares</h3>
+
+    <div class="row">
+        <div class="card" onclick="abrirModal('html')">
+            <img src="jean/foto4.jpg">
+            <span>HTML & CSS</span>
+        </div>
+
+        <div class="card" onclick="abrirModal('js')">
+            <img src="jean/foto3.jpg">
+            <span>JavaScript</span>
+        </div>
+
+        <div class="card" onclick="abrirModal('react')">
+            <img src="jean/foto2.jpg">
+            <span>React</span>
+        </div>
+
+        <div class="card" onclick="abrirModal('backend')">
+            <img src="jean/photo1'.jpg">
+            <span>Backend</span>
+        </div>
+    </div>
+</section>
+
+<section class="cronograma" id="cronograma">
+    <h3>Cronograma</h3>
+
+    <div class="aula" onclick="abrirAula(23)">Dia 23 - HTML</div>
+    <div class="aula" onclick="abrirAula(24)">Dia 24 - JavaScript</div>
+    <div class="aula" onclick="abrirAula(25)">Dia 25 - React</div>
+    <div class="aula" onclick="abrirAula(26)">Dia 26 - Backend</div>
+</section>
+
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="titulo"></h2>
+        <p id="descricao"></p>
+        <button onclick="fecharModal()">Fechar</button>
+    </div>
+</div>
+
+<div class="modal" id="modalAula">
+    <div class="modal-content">
+        <h2 id="tituloAula"></h2>
+        <div id="videoAula"></div>
+        <button onclick="fecharAula()">Fechar</button>
+    </div>
+</div>
+
+
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-box">
+            <h3>ProFlix</h3>
+            <p>Aprenda programação de forma simples e profissional </p>
+        </div>
+
+        <div class="footer-box">
+            <h4>Contato</h4>
+            <p>Email: suporte@proflix.com</p>
+            <p>WhatsApp: (48) 99999-9999</p>
+            <p>Florianópolis - SC</p>
+        </div>
+
+        <div class="footer-box">
+            <h4>Redes</h4>
+            <a href="#">Instagram</a><br>
+            <a href="#">YouTube</a><br>
+            <a href="#">TikTok</a>
+        </div>
+
+    </div>
+
+    <p class="copy">© 2026 ProFlix</p>
+</footer>
+
+
+<a class="whatsapp" href="https://wa.me/5548999999999" target="_blank">💬</a>
+
+<script>
+function abrirModal(tipo){
+    let titulo=document.getElementById("titulo");
+    let descricao=document.getElementById("descricao");
+
+    if(tipo==="html"){titulo.innerText="HTML";descricao.innerText="Estrutura de sites";}
+    if(tipo==="js"){titulo.innerText="JavaScript";descricao.innerText="Lógica";}
+    if(tipo==="react"){titulo.innerText="React";descricao.innerText="Front moderno";}
+    if(tipo==="backend"){titulo.innerText="Backend";descricao.innerText="Servidor";}
+
+    document.getElementById("modal").style.display="flex";
+}
+
+function fecharModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+function abrirAula(dia){
+    let hoje=new Date().getDate();
+
+    if(dia<=hoje){
+        document.getElementById("tituloAula").innerText="Aula liberada ";
+        document.getElementById("videoAula").innerHTML=
+        '<iframe width="100%" height="250" src="https://www.youtube.com/embed/mU6anWqZJcc"></iframe>';
+    }else{
+        document.getElementById("tituloAula").innerText="Aula bloqueada ";
+        document.getElementById("videoAula").innerHTML="";
+    }
+
+    document.getElementById("modalAula").style.display="flex";
+}
+
+function fecharAula(){
+    document.getElementById("modalAula").style.display="none";
+}
+</script>
+
+</body>
+</html>
